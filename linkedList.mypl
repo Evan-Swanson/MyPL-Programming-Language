@@ -1,0 +1,35 @@
+# simple linked list
+
+struct Node
+    var val = 0;
+    var next: Node = nil;
+end
+
+# list: [10,20,30]
+
+var head = new Node;
+set head.val = 10;
+
+var len = 6;
+var i = 1;
+var ptr = head;
+
+while i < len do
+    set ptr.val = i * 10;
+    set ptr.next = new Node;
+    set ptr = ptr.next;
+    set i = i + 1;
+end
+
+print("[");
+set i = 1;
+set ptr = head;
+while i < len do
+    print(itos(ptr.val));
+    if i < (len - 1) then
+        print(", ");
+    end
+    set ptr = ptr.next;
+    set i = i + 1;
+end
+print("]\n");

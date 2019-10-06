@@ -1,0 +1,79 @@
+#-----------------------------------
+# binary search tree implementation
+#-----------------------------------
+
+# tree node that holds an int value
+struct Node
+    var value = 0;
+    var left: Node = nil;
+    var right: Node = nil;
+end
+
+# create a new tree
+fun Node make_tree(val: int)
+    var n = new Node;
+    set n.value = val;
+    return n;
+end
+
+# insert a value into the given tree
+fun nil insert(tree: Node, val: int)
+    if tree == nil then
+        return;
+    end
+    if val <= tree.value then
+        if tree.left == nil then
+            set tree.left = new Node;
+            set tree.left.value = val;
+        else
+            insert(tree.left, val);
+        end
+    else
+        if tree.right == nil then
+            set tree.right = new Node;
+            set tree.right.value = val;
+        else
+            insert(tree.right, val);
+        end
+    end
+end
+
+# print out the tree in sorted order
+fun nil print_tree(tree: Node)
+    if tree != nil then
+        print_tree(tree.left);
+        print(" " + itos(tree.value));
+        print_tree(tree.right);
+    end
+end
+
+# get the height of the tree
+fun int height(tree: Node)
+    if tree == nil then
+        return 0;
+    else
+        var lh = height(tree.left);
+        var rh = height(tree.right);
+        if lh >= rh then
+            return 1 + lh;
+        else
+            return 1 + rh;
+        end
+    end
+end
+
+
+# example tree
+var tree = make_tree(10);
+insert(tree, 5);
+insert(tree, 15);
+insert(tree, 2);
+insert(tree, 12);
+insert(tree, 7);
+insert(tree, 1);
+insert(tree, 13);
+insert(tree, 14);
+print("Tree Values:");
+print_tree(tree);
+print("\n");
+print("Tree Height: " + itos(height(tree)) + "\n");
